@@ -46,11 +46,10 @@ function navbarBuild() {
   navbarSections.forEach((section, i) => {
     const listItem = document.createElement("li"); // creates a li element for the nav menu
     const listLink = document.createElement("a"); //creates an a element for the nav menu
-    const navInfo = section.querySelector("h2").textContent; // selects the text content from each landing container with h2 element
-
+    const navInfo = document.querySelector("h2").textContent; // creates variable to store section topings text cotent
     listLink.classList.add("menu_link"); // calls the clases from listLink and adds to the link of the item
     listLink.href = `#section${i + 1}`; // anchors the link for the item
-    listLink.textContent = navInfo;
+    listLink.textContent = `Section${i + 1}`;
     listItem.appendChild(listLink); //adds on at the end the a element
     navbar.appendChild(listItem); //adds on the li element
   });
