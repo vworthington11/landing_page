@@ -26,6 +26,7 @@
 
 const navbarSections = document.querySelectorAll("section"); //grab all element sections from the HTML
 const section = document.querySelectorAll(".landing__container"); //grab all the class of landing-container from HTML
+const navbarLink = document.querySelectorAll("ul");
 /**
  * End Global Variables
  * Start Helper Functions
@@ -38,9 +39,10 @@ const section = document.querySelectorAll(".landing__container"); //grab all the
  *
  */
 // build the nav
-function sectionScroll(section) {
+/*function sectionScroll(section) {
   section.scrollIntoView();
 } // calls each section to see if it is in the viewport
+*/
 function navbarBuild() {
   const navbar = document.getElementById("navbar__list"); // grabbing the ul to start the navbar menu
   navbarSections.forEach((section, i) => {
@@ -56,7 +58,7 @@ function navbarBuild() {
 }
 navbarBuild(); //calls the build nav function
 // Add class 'active' to section when near top of viewport
-const activeRemove = (section) => {
+const activeRemove = (section, navbarLink) => {
   section.classList.remove("your-active-class");
 }; //removes the "your-active-class" from a section if it is not active
 
@@ -74,11 +76,15 @@ const activeSection = () => {
     activeAdd(inviewport(), section);
   });
 };
-
-// Scroll to anchor ID using scrollTO event
+//Add  menu scrolling
 function menuScroll() {
-  const navbarScroll = document.getElementById("navbar_list");
-  navbarScroll.scrollIntoView(); //gives nav bar a smooth scroll when clicking links on nav bar
+  document
+    .getElementsByClassName("menu_link")
+    .addEventListener("click", function (event) {
+      event.preventDefault();
+      const navbarScroll = document.getElementById("navbar_list"); // grab the class menu_link and add scroll listener in the nav bar
+      navbarScroll.scrollIntoView(); //gives nav bar a smooth scroll when clicking links on nav bar
+    });
 }
 /**
  * End Main Functions
@@ -116,3 +122,18 @@ const scrollToTop = function () {
 // call the scroll to top button
 
 scrollToTop();
+
+// highlight the active nav bar link
+
+const navContainer = document.getElementsByClassName("nav"); //get the nav element from HTML
+const navbarLinks = document.getElementsByClassName("menu_link"); // Get all nav links from HTML
+// crete a for loop that loops through the nav links and adds active class
+for (i = 0; i < navbarLinks.length; i++) {
+  navbarLinks[i].addEventListener("click", function () {
+    const current = document.getElementsByClassName("active");
+    if (current.length > 0) {
+      current[0].className = current[0].className.replace(" active", ""); // if there is no active class then doesn't hightlight as active
+    }
+    this.className += " active"; // Add the active class to the current/clicked button
+  });
+}
