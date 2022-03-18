@@ -124,16 +124,11 @@ const scrollToTop = function () {
 scrollToTop();
 
 // highlight the active nav bar link
-
-const navContainer = document.getElementsByClassName("nav"); //get the nav element from HTML
-const navbarLinks = document.getElementsByClassName("menu_link"); // Get all nav links from HTML
-// crete a for loop that loops through the nav links and adds active class
-for (i = 0; i < navbarLinks.length; i++) {
-  navbarLinks[i].addEventListener("click", function () {
-    const current = document.getElementsByClassName("active");
-    if (current.length > 0) {
-      current[0].className = current[0].className.replace(" active", ""); // if there is no active class then doesn't hightlight as active
-    }
-    this.className += " active"; // Add the active class to the current/clicked button
+const navbarLinks = document.querySelectorAll("li"); // grab all list items from HTML
+navbarLinks.forEach((li) => {
+  //create a for each loop to take the li elements and if clicked then add active or remove
+  li.addEventListener("click", function () {
+    navbarLinks.forEach((link) => link.classList.remove("active"));
+    this.classList.add("active");
   });
-}
+});
