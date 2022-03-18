@@ -78,7 +78,7 @@ section {
 }
 
 .navbar__menu .menu__link {
-  display: block;
+  display: inline-block;
   padding: 1em;
   font-weight: bold;
   text-decoration: none;
@@ -89,6 +89,20 @@ section {
   background: #333;
   color: #fff;
   transition: ease 0.3s all;
+}
+.navbarLinks {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Style the active class (and buttons on mouse-over) */
+.active,
+.navbarLinks:hover {
+  background-color: #666;
+  color: white;
 }
 
 /* Header Styles */
@@ -255,4 +269,7 @@ html {
 #scroll-btn.show {
   opacity: 1;
   transition: opacity 1s, transform 1s;
+}
+#menu_link_active {
+  background-color: red;
 }
