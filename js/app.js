@@ -22,7 +22,7 @@
  * Define Global Variables
  *
  */
-/*const navbar = document.getElementById("navbar__list"); //create unordered list*/
+const navbar = document.getElementById("navbar__list"); //create unordered list*/
 
 const navbarSections = document.querySelectorAll("section"); //grab all element sections from the HTML
 const section = document.querySelectorAll(".landing__container"); //grab all the class of landing-container from HTML
@@ -49,7 +49,7 @@ function navbarBuild() {
     const listItem = document.createElement("li"); // creates a li element for the nav menu
     const listLink = document.createElement("a"); //creates an a element for the nav menu
     const navInfo = document.querySelector("h2").textContent; // creates variable to store section topings text cotent
-    listLink.classList.add("menu_link"); // calls the clases from listLink and adds to the link of the item
+    listLink.classList.add("menu_link"); // calls the classes from listLink and adds to the link of the item
     listLink.href = `#section${i + 1}`; // anchors the link for the item
     listLink.textContent = `Section${i + 1}`;
     listItem.appendChild(listLink); //adds on at the end the a element
@@ -77,15 +77,20 @@ const activeSection = () => {
   });
 };
 //Add  menu scrolling
-function menuScroll() {
-  document
-    .getElementsByClassName("menu_link")
-    .addEventListener("click", function (event) {
-      event.preventDefault();
-      const navbarScroll = document.getElementById("navbar_list"); // grab the class menu_link and add scroll listener in the nav bar
-      navbarScroll.scrollIntoView(); //gives nav bar a smooth scroll when clicking links on nav bar
+
+const href = 'a[href^="#"]'; //select anchor links
+const hrefList = document.querySelectorAll(href); // store anchor links as varibale
+hrefList.forEach((anchor) => {
+  //create for each function that takes the anchor links
+  anchor.onclick = function (e) {
+    //create for each function that takes the anchor links
+    e.preventDefault();
+    const scrollToSection = document.querySelector(this.hash); //create a variable to scroll to each href
+    scrollToSection.scrollIntoView({
+      behavior: "smooth", //scroll the section link into view
     });
-}
+  };
+});
 /**
  * End Main Functions
  * Begin Events
